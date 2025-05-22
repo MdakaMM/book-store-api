@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: bookdb-mysql
+#    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Musa!1994
+      MYSQL_DATABASE: bookdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: bookmanagement-app
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/bookdb
+      DB_USER: root
+      DB_PASSWORD: Musa!1994
+    restart: on-failure
+
+volumes:
+  mysql-data:
