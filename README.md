@@ -92,8 +92,7 @@ springdoc.swagger-ui.enabled=true
 ### Run the Application
 
 ```bash
-mvn clean install
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 ---
