@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookService {
     @Autowired
@@ -37,9 +39,14 @@ public class BookService {
         return repository.findAll(pageable);
     }
 
-    public Page<Book> searchBooks(String query, Pageable pageable) {
-        return repository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(query, query, pageable);
+//    public Page<Book> searchBooks(String query, Pageable pageable) {
+//        return repository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(query, query, pageable);
+//    }
+    public List<Book> searchBooks(String q) {
+        return repository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(q, q);
     }
+
+
 
     public BookResponse updateBook(Long id, BookRequest request) {
         Book book = getBookEntity(id);

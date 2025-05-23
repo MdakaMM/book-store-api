@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -57,10 +59,9 @@ public class BookController {
 //    }
 
     @GetMapping("/search")
-    public ResponseEntity<Page<Book>> search(
-            @RequestParam String q,
-            @ParameterObject Pageable pageable) {
-        return ResponseEntity.ok(service.searchBooks(q, pageable));
+    public ResponseEntity<List<Book>> search(@RequestParam String q) {
+        return ResponseEntity.ok(service.searchBooks(q));
     }
+
 
 }
