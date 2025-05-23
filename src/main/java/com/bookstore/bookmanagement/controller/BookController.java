@@ -5,6 +5,7 @@ import com.bookstore.bookmanagement.dto.BookResponse;
 import com.bookstore.bookmanagement.entity.Book;
 import com.bookstore.bookmanagement.service.BookService;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,13 +41,26 @@ public class BookController {
         return ResponseEntity.noContent().build();
     }
 
+//    @GetMapping
+//    public ResponseEntity<Page<Book>> listAll(Pageable pageable) {
+//        return ResponseEntity.ok(service.getAllBooks(pageable));
+//    }
+
     @GetMapping
-    public ResponseEntity<Page<Book>> listAll(Pageable pageable) {
+    public ResponseEntity<Page<Book>> listAll(@ParameterObject Pageable pageable) {
         return ResponseEntity.ok(service.getAllBooks(pageable));
     }
 
+//    @GetMapping("/search")
+//    public ResponseEntity<Page<Book>> search(@RequestParam String q, Pageable pageable) {
+//        return ResponseEntity.ok(service.searchBooks(q, pageable));
+//    }
+
     @GetMapping("/search")
-    public ResponseEntity<Page<Book>> search(@RequestParam String q, Pageable pageable) {
+    public ResponseEntity<Page<Book>> search(
+            @RequestParam String q,
+            @ParameterObject Pageable pageable) {
         return ResponseEntity.ok(service.searchBooks(q, pageable));
     }
+
 }
